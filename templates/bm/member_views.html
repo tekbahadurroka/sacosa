@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Member Details</h1>
+    {% comment %} <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+        For more information about DataTables, please visit the <a target="_blank"
+            href="https://datatables.net">official DataTables documentation</a>.</p> {% endcomment %}
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <div class="col-auto text-right float-right ml-auto">
+                <a href="{% url 'member_entry' %}" class="btn btn-outline-primary mr-2"><i class="fas fa-user-alt">&nbsp;&nbsp;</i>Add Member</a>
+             </div>
+            <h6 class="m-0 font-weight-bold text-primary">Member Data Tables</h6>
+        </div>
+        {% include 'includes/messages.html' %}
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>                     
+                      
+                        <tr>
+                            <th>ID</th>
+                            <th>Member Name</th>
+                            <th>Spouse Name</th>
+                            <th>Father's Nmae</th>
+                            <th>Grand Father' Name</th>
+                            <th>Branch Name</th>
+                            <th class="text-right">Action</th>
+                        </tr>
+                      
+                    </thead>
+                    <tbody>
+                        {% for m in member_view %}
+                        <tr>
+                            <td>{{m.id}}</td>
+                            <td>
+                            <h6 class="table-avatar">
+                            {% comment %} <img class="avatar-img rounded-circle" src="/{{m.photo}}" height="40px" width="35px" alt="User Image"> {% endcomment %}
+                                {{m.first_name}} {{m.last_name}}
+                             </h6>
+                            </td>
+                            <td>{{m.spouse}}</td>
+                            <td>{{m.father}}</td>
+                            <td>{{m.father_inlow}}</td>
+                            <td>{{m.branch}}</td>
+                            <td class="text-right">
+                                <div class="actions">
+                                   <a href="{% url 'member_edit' m.id %}" class="btn btn-sm bg-success-light mr-2">
+                                   <i class="fas fa-pen" style="color: green;"></i>
+                                   </a>
+                                   <a href="{% url 'member_delete' m.id %}" class="btn btn-sm bg-danger-light">
+                                   <i class="fas fa-trash" style="color: red;"></i>
+                                   </a>
+                                </div>
+                             </td>
+                        </tr>
+                        {% endfor %}                 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+    
+{% endblock content %}
+    

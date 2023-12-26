@@ -1,0 +1,80 @@
+ {% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="content container-fluid">
+    <div class="page-header">
+       <div class="row align-items-center">
+          <div class="col">
+             <h3 class="page-title">Staff Details</h3>
+             {% comment %} <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                <li class="breadcrumb-item active">Stff Data Tables</li>
+             </ul> {% endcomment %}
+          </div>
+         
+          <div class="col-auto text-right float-right ml-auto">
+            <a href="{% url 'register' %}" class="btn btn-outline-primary mr-2"><i class="fas fa-user-plus"></i>&nbsp;Add Staff</a>
+         </div>
+       </div>
+    </div>
+    {% include 'includes/messages.html' %}
+    <div class="row">
+       <div class="col-sm-12">
+          <div class="card card-table">
+             <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                     {% comment %} {% include 'includes/messages.html' %} {% endcomment %}
+                      <thead style="text-align: center; background-color: aqua;">
+                         <tr>
+                            <th>ID</th>
+                            <th>Staff Name</th>
+                            <th>Address</th>
+                            <th>Username</th>
+                            <th>Email ID</th>
+                            <th>Gender</th>
+                            <th>Branch Name</th>
+                            <th>Joining Date</th>
+                            <th class="text-right">Action</th>
+                         </tr>
+                      </thead>
+                      <tbody>
+                            {% for s in satff_view %}
+                            <tr>
+                                <td>{{s.id}}</td>
+                                <td>
+                                <h6 class="table-avatar">
+                                    <img class="avatar-img rounded-circle" src="/{{s.admin.profile_pic}}" height="40px" width="35px" alt="User Image">
+                                    {{s.admin.first_name}} {{s.admin.last_name}}
+                                 </h6>
+                                </td>
+                                <td>{{s.address}}</td>
+                                <td>{{s.admin.username}}</td>
+                                <td>{{s.admin.email}}</td>
+                                <td>{{s.gender}}</td>
+                                <td>{{s.branch_id}}</td>
+                                <td>{{s.create_date}}</td>
+                            <td class="text-right">
+                               <div class="actions">
+                                  <a href="{% url 'staff_edit' s.id %}" class="btn btn-sm" style="color: blue;">
+                                  <i class="fas fa-user-edit"></i>
+                                  </a>
+                                  <a href="{% url 'delete_staff' s.admin.id %}" class="btn btn-sm bg-danger-light" style="color: red;">
+                                  <i class="fas fa-trash"></i>
+                                  </a>
+                               </div>
+                            </td>
+                         </tr>
+                         {% endfor %}
+                      </tbody>
+                   </table>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+    
+{% endblock content %}
+    

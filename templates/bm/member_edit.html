@@ -1,0 +1,351 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<div class="page-wrapper">
+    <div class="content container-fluid">
+       <div class="page-header">
+          <div class="row align-items-center">
+             <div class="col">
+                <h3 class="page-title">Member Entry Form</h3>
+                <ul class="breadcrumb">
+                   <li class="breadcrumb-item"><a href="{% url 'home' %}">Dashboard</a></li>
+                   <li class="breadcrumb-item active">Member Entry</li>
+                </ul>
+             </div>
+          </div>
+       </div>
+       <div class="row">
+          <div class="col-sm-12">
+             <div class="card">
+                <div class="card-body">
+                   <form action="{% url 'member_update' %}" method="post" enctype="multipart/form-data" id="memberForm" data-courses-url="{% url 'ajax_load_center' %}">
+                     {% csrf_token %}
+                      <div class="row">
+                         <div class="col-12">
+                            <h5 class="form-title" style="color: blue;"><span><b>Member Information</b></span></h5>
+                         </div>
+                         <div class="col-12 col-sm-2">
+                           <div class="form-group">
+                              <input type="text" class="form-control" name="member_id" value="{% for i in member %}{{i.id}}{% endfor %}" hidden>
+                               <label>Branch Name</label>
+                               <select class="form-control" name="branch" id="branch">
+                                  <option value="0">--Select Branch--</option>
+                                  {% for a in branch %}
+                                  <option value="{{a.id}}">{{a.branch_name}}</option>
+                                  {% endfor %}
+                               </select>
+                           </div>
+                       </div>
+                         <div class="col-12 col-sm-2">
+                           <div class="form-group">
+                              <label>Center No</label>
+                              <select class="form-control" name="center" id="center">
+                                
+                              </select>
+                           </div>
+                        </div>
+                        <div class="col-12 col-sm-2">
+                           <div class="form-group">
+                              <label>Group</label>
+                              <select class="form-control" name="group" id="group">
+                                
+                              </select>
+                           </div>
+                        </div>
+                         <div class="col-12 col-sm-3">
+                            <div class="form-group">
+                               <label>First Name</label>
+                               <input type="text" class="form-control" name="first_name" value="{% for i in member %}{{i.first_name}}{% endfor %}">
+                               
+                            </div>
+                         </div>
+                         <div class="col-12 col-sm-2">
+                            <div class="form-group">
+                               <label>Last Name</label>
+                               <input type="text" class="form-control" name="last_name" value="{% for i in member %}{{i.last_name}}{% endfor %}">
+                            </div>
+                         </div>
+                         <div class="col-12 col-sm-2">
+                           <div class="form-group">
+                              <label>Mobile Number</label>
+                              <input type="text" class="form-control" name="mobile" value="{% for i in member %}{{i.phone_number}}{% endfor %}">
+                           </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                           <div class="form-group">
+                              <label>Email</label>
+                              <input type="email" class="form-control" name="email" value="{% for i in member %}{{i.email}}{% endfor %}">
+                           </div>
+                        </div>
+                         <div class="col-12 col-sm-2">
+                           <div class="form-group">
+                              <label>Gender</label>
+                              <select class="form-control" name="gender">
+                                 <option>Select Gender</option>
+                                 <option>Female</option>
+                                 <option>Male</option>
+                                 <option>Others</option>
+                              </select>
+                           </div>
+                        </div>
+                         <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                               <label>Date Of Birth</label>
+                               <input type="date" class="form-control" name="dob" value="{% for i in member %}{{i.date_of_birth}}{% endfor %}">
+                            </div>
+                         </div>
+                         <div class="col-12 col-sm-4">
+                           <div class="form-group">
+                              <label>Citizenship No</label>
+                              <input type="text" class="form-control" name="citizenship" value="{% for i in member %}{{i.citizenship_no}}{% endfor %}">
+                           </div>
+                        </div>
+                         <div class="col-12 col-sm-2">
+                            <div class="form-group">
+                               <label>Issue Date</label>
+                                  <input type="date" class="form-control" name="issue_date" value="{% for i in member %}{{i.issue_date}}{% endfor %}">
+                            </div>
+                         </div>
+                         <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                               <label>Issue Place</label>
+                               <input type="text" class="form-control" name="place" value="{% for i in member %}{{i.issue_place}}{% endfor %}">
+                            </div>
+                         </div>
+                         <div class="col-12 col-sm-2">
+                           <div class="form-group">
+                              <label>Religion</label>
+                              <select class="form-control" name="religion">
+                                 <option>Select Relison</option>
+                                 <option>Hindu</option>
+                                 <option>Muslim</option>
+                                 <option>Kritchia</option>
+                                 <option>Boudh</option>
+                                 <option>Isye</option>
+                              </select>
+                           </div>
+                        </div>
+                        <div class="col-12 col-sm-2">
+                           <div class="form-group">
+                              <label>Category</label>
+                              <select class="form-control" name="category">
+                                 <option>Select Category</option>
+                                 <option>Brahaman</option>
+                                 <option>Chhetri</option>
+                                 <option>Dalit</option>
+                                 <option>Tharu</option>
+                                 <option>Magar</option>
+                                 <option>Madhesi</option>
+                                 <option>Other</option>
+                              </select>
+                           </div>
+                        </div>
+                         <div class="col-12">
+                           <h5 class="form-title" style="color: blue;"><span><b>Permanent Address</b></span></h5>
+                        </div>
+                        <div class="col-12 col-sm-3">
+                           <div class="form-group">
+                              <label>District</label>
+                              <select class="form-control" name="district">
+                                 <option>Select District</option>
+                                 <option>Female</option>
+                              </select>
+                           </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                           <div class="form-group">
+                              <label>Municipilaty</label>
+                              <select class="form-control" name="municipilaty">
+                                 <option>Select Municipilaty</option>
+                                 <option>Female</option>
+                              </select>
+                           </div>
+                        </div>
+                         <div class="col-12 col-sm-1">
+                            <div class="form-group">
+                               <label>Worda No</label>
+                               <input type="text" class="form-control" name="worda" value="{% for i in member %}{{i.worda}}{% endfor %}">
+                            </div>
+                         </div>
+                         <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                               <label>Village</label>
+                               <input type="text" class="form-control" name="village" value="{% for i in member %}{{i.village}}{% endfor %}">
+                            </div>
+                         </div>
+                         <div class="col-12">
+                           <h5 class="form-title" style="color: blue;"><span><b>Family Details</b></span></h5>
+                        </div>
+                         <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                               <label>Father's Name</label>
+                               <input type="text" class="form-control" name="father" value="{% for i in member %}{{i.father}}{% endfor %}">
+                            </div>
+                         </div>
+                         <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                               <label>Spouse Name</label>
+                               <input type="text" class="form-control" name="spouse" value="{% for i in member %}{{i.spouse}}{% endfor %}">
+                            </div>
+                         </div>
+                         <div class="col-12 col-sm-4">
+                           <div class="form-group">
+                              <label>S-Date of Birth</label>
+                              <input type="date" class="form-control" name="spouse_dob" value="{% for i in member %}{{i.spouse_dob}}{% endfor %}">
+                           </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                           <div class="form-group">
+                              <label>S-Citizenship No</label>
+                              <input type="text" class="form-control" name="spouse_citizen" value="{% for i in member %}{{i.s_citizenship}}{% endfor %}">
+                           </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                           <div class="form-group">
+                              <label>S-Issue Date</label>
+                              <input type="date" class="form-control" name="spouse_issue" value="{% for i in member %}{{i.s_issue_date}}{% endfor %}">
+                           </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                           <div class="form-group">
+                              <label>Issue Palce</label>
+                              <input type="text" class="form-control" name="spouse_place" value="{% for i in member %}{{i.s_place}}{% endfor %}">
+                           </div>
+                        </div>
+                         <div class="col-12 col-sm-4">
+                           <div class="form-group">
+                              <label>Spouse's Occupation</label>
+                              <input type="text" class="form-control" name="soccupation" value="{% for i in member %}{{i.s_occupation}}{% endfor %}">
+                           </div>
+                        </div>
+                         <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                               <label>Grandfather's Name/Father in Low</label>
+                               <input type="text" class="form-control" name="grandfather" value="{% for i in member %}{{i.father_inlow}}{% endfor %}">
+                            </div>
+                         </div>
+                         <div class="col-12">
+                           <h5 class="form-title" style="color: blue;"><span><b>Temprorary Address</b></span></h5>
+                        </div>
+                        <div class="col-12 col-sm-3">
+                           <div class="form-group">
+                              <label>District</label>
+                              <select class="form-control" name="tdistrict">
+                                 <option>Select District</option>
+                                 <option>Female</option>
+                              </select>
+                           </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                           <div class="form-group">
+                              <label>Municipilaty</label>
+                              <select class="form-control" name="tmunicipilaty">
+                                 <option>Select Municipilaty</option>
+                                 <option>Female</option>
+                              </select>
+                           </div>
+                        </div>
+                         <div class="col-12 col-sm-1">
+                            <div class="form-group">
+                               <label>Worda No</label>
+                               <input type="text" class="form-control" name="tworda" value="{% for i in member %}{{i.tworda}}{% endfor %}">
+                            </div>
+                         </div>
+                         <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                               <label>Village</label>
+                               <input type="text" class="form-control" name="tvillage" value="{% for i in member %}{{i.tvillage}}{% endfor %}">
+                            </div>
+                         </div>
+                         <div class="col-12">
+                           <h5 class="form-title" style="color: blue;"><span><b>Photo & Documents</b></span></h5>
+                        </div>
+                         <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                               <label>Photo</label>
+                               <input type="file" class="form-control" name="member_photo">
+                            </div>
+                         </div>
+                         <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                               <label>Citizenship Copy</label>
+                               <input type="file" class="form-control" name="citizen_copy">
+                            </div>
+                         </div>
+                         <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                               <label>Signature Card</label>
+                               <input type="file" class="form-control" name="sig_card">
+                            </div>
+                         </div>
+                         <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                         </div>
+                      </div>
+                   </form>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+ <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $("#branch").change(function () {
+      var url = $("#memberForm").attr("data-courses-url");  
+      var branchId = $(this).val();  
+
+      $.ajax({                       
+        url: '{% url 'ajax_load_center' %}',                   
+        data: {
+          'branch': branchId      
+        },
+        success: function (data) {
+          $("#center").html(data); 
+        }
+      });
+
+    });
+    $("#center").change(function () {
+      var url = $("#memberForm").attr("data-courses-url");  
+      var centerId = $(this).val();  
+
+      $.ajax({                       
+        url: '{% url 'ajax_load_group' %}',                   
+        data: {
+          'center': centerId      
+        },
+        success: function (data) {
+          $("#group").html(data); 
+        }
+      });
+
+    });
+  </script>
+
+{% endblock content %}
+{% comment %} <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-
+nQLuAZGRRCILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script> 
+<script>
+$(document).ready(function() {
+   $("#branch").change(function() {
+      var branch_id = $(this).val();
+      var url = "/get-center/?branch_id=" + branch_id; 
+      $.get(url, function(data, status) {
+         $("#center").html(data);
+      });
+   });
+});
+</script> {% endcomment %}
+    
+{% comment %} <option>Select Center</option>
+{% for a in center %}
+<option value="{{a.id}}">{{a.center_no}}</option>
+{% endfor %} {% endcomment %}
+
+{% comment %} <option>Select Group</option>
+{% for a in group %}
+<option value="{{a.id}}">{{a.group}}</option>
+{% endfor %} {% endcomment %}

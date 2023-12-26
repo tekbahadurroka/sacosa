@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="content container-fluid">
+    <div class="page-header">
+       <div class="row align-items-center">
+          <div class="col">
+             <h3 class="page-title">Branch Views</h3>
+             {% comment %} <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                <li class="breadcrumb-item active">Branch view</li>
+             </ul> {% endcomment %}
+          </div>
+          <div class="col-auto text-right float-right ml-auto">
+             <a href="{% url 'add_branch' %}" class="btn btn-primary"><i class="fas fa-plus"></i>  Add Branch</a>
+             <a href="{% url 'home' %}" class="btn btn-primary"><i class="fas fa-close"></i> Cancel</a>
+          </div>
+       </div>
+    </div>
+    <div class="row">
+       <div class="col-sm-12">
+          <div class="card card-table">
+             <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                     
+                     {% include 'includes/messages.html' %}
+                      <thead style="text-align: center; background-color: blue; color: aliceblue;">
+                         <tr>
+                            <th>Branch Code</th>
+                            <th>Branch Name</th>
+                            <th>Branch Address</th>
+                            <th>Create Date</th>
+                            <th>Update Date</th>
+                            
+                            <th class="text-right">Action</th>
+                         </tr>
+                      </thead>
+                      <tbody>
+                        
+                        {% for b in branch %}                          
+                         <tr>
+                            <td>{{b.branch_code}}</td>
+                            <td>{{b.branch_name}}</td>
+                            <td>{{b.address}}</td>
+                            <td>{{b.create_date}}</td>
+                            <td>{{b.update_date}}</td>
+
+                            <td class="text-right">
+                               <div class="actions">
+                                  <a href="{% url 'edit_branch' b.id %}" class="btn btn-sm bg-success-light mr-2">
+                                  <i class="fas fa-pen" style="color: green;"></i>
+                                  </a>
+                                  <a href="{% url 'delete_branch' b.id %}" class="btn btn-sm bg-danger-light">
+                                  <i class="fas fa-trash" style="color: red;"></i>
+                                  </a>
+                               </div>
+                            </td>
+                         </tr>
+                         {% endfor %}
+                      </tbody>
+                   </table>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+    
+{% endblock content %}

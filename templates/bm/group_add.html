@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% load static %}
+</html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="row">
+    <div class="col-sm-12">
+       <div class="card">
+          <div class="card-body">
+            {% include 'includes/messages.html' %}
+            <form method="post" id="groupForm" data-courses-url="{% url 'ajax_load_center' %}">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-12">
+                      <h5 class="form-title"><span>Group Setup</span></h5>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Branch Name</label>
+                            <select name="branch" id="branch" class="form-control">
+                               <option value="0">--Select Branch--</option>
+                               {% for i in branch %}
+                               <option value="{{i.id}}">{{i.branch_name}}</option>
+                               {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Center No</label>
+                            <select  name="center" id="center" class="form-control">
+                               
+                            </select>
+                        </div>
+                    </div>
+                        <div class="col-12 col-sm-3">
+                            <div class="form-group">
+                                <label>Group Create</label>
+                                <input type="text" class="form-control" name="group_code" required>
+                            </div>
+                        </div>      
+                        <div class="col-12 col-sm-2">
+                            <div class="form-group">
+                                <label>Group Setup Date</label>
+                                <input type="text" class="form-control" style="" name="setup_date" readonly>
+                            </div> 
+                        </div>              
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary" name="add_branch">Group Create</button>
+                            <a href="{% url 'view_center' %}" class="btn btn-primary">Cancel</a>
+                        </div>
+                </div>
+
+             </form>
+          </div>
+       </div>
+    </div>
+ </div>
+ <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $("#branch").change(function () {
+      var url = $("#groupForm").attr("data-courses-url");  // get the url of the `load_courses` view
+      var branchId = $(this).val();  // get the selected programming ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/load-courses/)
+        data: {
+          'branch': branchId       // add the programming id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_courses` view function
+          $("#center").html(data);  // replace the contents of the course input with the data that came from the server
+        }
+      });
+
+    });
+  </script>
+</body>
+</html>
+    
+{% endblock content %}
+{% comment %} {% if request.GET.branch == e.id|lower %}selected{% endif %} {% endcomment %}
+  {% comment %} <script>
+       $("#branch").change(function(){
+         var url = $("#groupCreate").attr("data-center-url");
+         var branchId = $(this).val();
+         $.ajax({
+            url: url,
+            data: {
+                'branch': branchId
+            },
+            success: function data(){
+                $("#center").html(data);
+            },
+         });
+       })
+    </script> {% endcomment %}
+
+    {% comment %} <script type="text/javascript">
+        $(document).ready(function () {
+            $('#branchDropdown').change(function () {
+                var branch_id = $(this).val();
+                $.ajax({
+                    url: '/ajax/get_items/',
+                    data: {
+                        'branch_id': branch_id
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        var center = data.center;
+                        var centerDropdown = $('#centerDropdown');
+                        centerDropdown.empty();
+                        $.each(center, function (group_add, center) {
+                            centerDropdown.append('<option value="' + center.id + '">' + center.center_no + '</option>');
+                        });
+                    }
+                });
+            });
+        });
+    </script> {% endcomment %}
+
+{% comment %}     
+    $(document).ready(function(){
+     
+        var department = $("#department");
+        var Employee = $("#Employee");
+        var $options = Employee.find('option');
+        department.on('change',function(){
+           Employee.html($options.filter('[value="'+ this.value  +'"]'));
+        }).trigger('change'); 
+        
+        
+       });  {% endcomment %}
+{% comment %} 
+       //<script>
+        $(document).ready(function(){
+            $("#branch").change(function(){
+                var branch_id = $(this).val();
+                var url = "/get-center/?branch_id="+branch_id;
+                $.get(url, function(data, status){
+                    $("#center").html(data);
+                    //console.log('Data being sent:', data);
+                });
+            });
+        });
+        </script> {% endcomment %}
+
+        {% comment %} <script>
+            function branchfield(){
+        
+                branchid = document.getElementById('branch').value; 
+                window.location = "branch="+branchid;
+            }
+            function centerfield(){
+                centerid = document.getElementById('center').value;
+                window.location = "/?branch="+'{{request.GET.branch}}'+"&center="+centerid;
+            }
+            </script>
+            <script src="https://cdn.jsdelive.net/npm/bootstrap@5.8.2/dist/js/bootstrap.bundle.min.js" integrity="sha354-MrcW6ZMFY1zcLAN+NtUVFOSA7sXSP1UyJoMp4YLEUNSTAP+JcXn/titIaxVXMTM"
+            crossorigin="anonymous"></script> {% endcomment %}

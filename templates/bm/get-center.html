@@ -1,0 +1,9 @@
+<option value="0">---select center---</option>
+{% for i in center %}
+<option value="{{ i.pk }}">{{ i.center_no }}</option>group
+{% endfor %}
+
+{% comment %} <option value="0">---select group---</option>
+{% for i in group %}
+<option value="{{ i.pk }}">{{ i.group }}</option>
+{% endfor %} {% endcomment %}

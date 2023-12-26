@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-12">
+       <div class="card">
+          <div class="card-body">
+            {% include 'includes/messages.html' %}
+             <form action="{% url 'edit_center' center.id %}" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-12">
+                      <h5 class="form-title"><span>Update Center</span></h5>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Branch Name</label>
+                            <select class="form-control" name="branch">
+                               <option>Select Branch</option>
+                               {% for e in branch %}
+                               <option value="{{e.id}}">{{e.branch_name}}</option>
+                               {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                        <div class="col-12 col-sm-1">
+                            <div class="form-group">
+                                <label>Center No</label>
+                                <input type="text" class="form-control" style="" name="center_code" value="{{center.center_no}}" required>
+                            </div>
+                        </div>      
+                        <div class="col-12 col-sm-3">
+                            <div class="form-group">
+                                <label>Center Name</label>
+                                <input type="text" class="form-control" style="" name="center_name" value="{{center.center_name}}" required>
+                            </div>
+                        </div> 
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <label>Center Address</label>
+                                <input type="text" class="form-control" style="" name="center_address" value="{{center.center_address}}" required>
+                            </div> 
+                        </div>  
+                        <div class="col-12 col-sm-2">
+                            <div class="form-group">
+                                <label>Meeting Day</label>
+                                <input type="text" class="form-control" style="" name="meeting_day" value="{{center.meeting_date}}" required>
+                            </div> 
+                        </div>     
+                        <div class="col-12 col-sm-2">
+                            <div class="form-group">
+                                <label>Next Meeting Date</label>
+                                <input type="text" class="form-control" style="" name="next_meeting" value="{{center.next_meeting_date}}" required>
+                            </div> 
+                        </div>
+                        <div class="col-12 col-sm-2">
+                            <div class="form-group">
+                                <label>Center Setup Date</label>
+                                <input type="text" class="form-control" style="" name="setup_date" value="{{center.create_date}}" readonly>
+                            </div> 
+                        </div>              
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary" name="add_branch">Update Center</button>
+                            <a href="{% url 'view_center' %}" class="btn btn-primary">Cancel</a>
+                        </div>
+                </div>
+
+             </form>
+          </div>
+       </div>
+    </div>
+ </div>
+    
+{% endblock content %}
+    

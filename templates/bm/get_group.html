@@ -1,0 +1,4 @@
+<option value="0">---select group---</option>
+{% for i in group %}
+<option value="{{ i.pk }}">{{ i.group }}</option>
+{% endfor %}

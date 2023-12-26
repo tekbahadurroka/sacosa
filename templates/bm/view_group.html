@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="content container-fluid">
+    <div class="page-header">
+       <div class="row align-items-center">
+          <div class="col">
+             <h3 class="page-title">Group Details</h3>
+             {% comment %} <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                <li class="breadcrumb-item active">Branch view</li>
+             </ul> {% endcomment %}
+          </div>
+          <div class="col-auto text-right float-right ml-auto">
+             <a href="{% url 'add_group' %}" class="btn btn-primary"><i class="fas fa-plus"></i>  Add Group</a>
+             <a href="{% url 'home' %}" class="btn btn-primary"><i class="fas fa-close"></i> Cancel</a>
+          </div>
+       </div>
+    </div>
+    <div class="row">
+       <div class="col-sm-12">
+          <div class="card card-table">
+             <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                     
+                     {% include 'includes/messages.html' %}
+                      <thead style="text-align: center; background-color: blue; color: aliceblue;">
+                         <tr>
+                            <th>Branch Name</th>
+                            <th>Center No & Name</th>
+                            <th>Group</th>
+                            <th>Create Date</th>
+                            <th>Update Date</th>
+                            {% comment %} <th>Update Date</th> {% endcomment %}
+                            
+                            <th class="text-right">Action</th>
+                         </tr>
+                      </thead>
+                      <tbody>
+                        
+                        {% for g in group %}                          
+                         <tr>
+                            <td>{{g.branch_name}}</td>
+                            <td>{{g.center_no}}</td>
+                            <td>{{g.group}}</td>
+                            <td>{{g.create_at}}</td>
+                            <td>{{g.update_at}}</td>
+                            {% comment %} <td>{{c.update_date}}</td> {% endcomment %}
+
+                            <td class="text-right">
+                               <div class="actions">
+                                  <a href="#" class="btn btn-sm bg-success-light mr-2">
+                                  <i class="fas fa-pen" style="color: green;"></i>
+                                  </a>
+                                  <a href="#" class="btn btn-sm bg-danger-light">
+                                  <i class="fas fa-trash" style="color: red;"></i>
+                                  </a>
+                               </div>
+                            </td>
+                         </tr>
+                         {% endfor %}
+                      </tbody>
+                   </table>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+    
+{% endblock content %}

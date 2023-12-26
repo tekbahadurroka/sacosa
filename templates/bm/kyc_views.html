@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+</head>
+<body>
+           
+    {% comment %} <div class="container">
+        
+        <img src="" alt="Avatar" class="image">
+        <div class="overlay">My Name is John</div>
+      
+    </div> {% endcomment %}
+    <div class="container ml-3">
+        <div class="page-header">
+            <h3>Member Details</h3>
+            {% for i in member %}
+            <div class="photo">
+            <img class="avatar-img rounded mr-4" style="float: right; border-color: blue;" src="/{{i.signature_card}}" height="300px" width="220px">
+            <img class="avatar-img rounded mr-4" style="float: right; border-color: blue;" src="/{{i.citizenship_copy}}" height="500px" width="300px">
+            </div>
+            <div class="table"> 
+            <img class="avatar-img rounded mr-4" style="float: right; border-color: blue;" src="/{{i.photo}}" height="180px" width="160px">
+            <form class="row g-2 mt-3">
+                <div class="col-md-4">
+                  <label for="inputEmail4" class="form-label"><b>Member's Name</b></label><br>&nbsp;&nbsp;{{i.first_name}} {{i.last_name}}              
+                </div>
+                
+                <div class="col-md-3">
+                    <label for="inputEmail4" class="form-label"><b>Account No</b></label><br>&nbsp;&nbsp;{{i.id}}
+                  </div>
+                  <div class="col-md-4">
+                    <label for="inputEmail4" class="form-label"><b>Member Address</b></label><br>&nbsp;&nbsp;{{i.municipilaty}} {{i.worda}}, {{i.district}}
+                  </div>
+                  <div class="col-md-4">
+                    <label for="inputEmail4" class="form-label"><b>Spouse's name</b></label><br>&nbsp;&nbsp;{{i.spouse}}
+                  </div>
+                  <div class="col-md-4">
+                    <label for="inputEmail4" class="form-label"><b>Father's name</b></label><br>&nbsp;&nbsp;{{i.father}}
+                  </div>
+                  <div class="col-md-5">
+                    <label for="inputEmail4" class="form-label"><b>Father in Low</b></label><br>&nbsp;&nbsp;{{i.father_inlow}}
+                  </div><br>
+                  <div class="col-md-4">
+                    <label for="inputEmail4" class="form-label"><b>Mobile Number</b></label><br>&nbsp;&nbsp;{{i.phone_number}} 
+                  </div>
+              </form>
+              <table class="table-bordered solit">
+                <thead>                       
+                    <tr>
+                        <th>Account No</th>
+                        <th>Account Type</th>
+                        <th>Amount</th>
+                        <th class="text-right">Action</th>
+                    </tr>
+                </thead>
+                <tbody>                       
+                    <tr>
+                        <td>Account No</td>
+                        <td>Account Type</td>
+                        <td>Amount</td>
+                        <td class="text-right">Action</td>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
+              {% endfor %}
+        </div>
+    </div>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+       
+    
+{% endblock content %}
+    

@@ -21,7 +21,7 @@ urlpatterns = [
     path('member_delete/<str:id>', views.member_delete, name="member_delete"),
     path('kyc_view/<str:id>', views.kyc_view, name="kyc_view"),
     path('search_box', views.search_box, name="search_box"),
-    
+    path('branch_see', views.branch_see, name="branch_see"),
    
       
     

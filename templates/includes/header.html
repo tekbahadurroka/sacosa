@@ -52,17 +52,13 @@
         
 
         <!-- Nav Item - Messages -->
-        <form class="form-inline mr-auto w-100 navbar-search">
+        <form class="form-inline mr-auto w-100 navbar-search" method="POST" action="{% url 'branch_see' %}">
+            {% csrf_token %}
             <div class="input-group">
                 <label>Center No</label>&nbsp;&nbsp;
-                <input type="text" class="form-control bg-light border-1 small"
-                    placeholder="Type center no" aria-label="Search"
-                    aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                    <a href="{% url 'search_box' %}" class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                    </a>
-                </div>
+                <input type="search" class="form-control bg-light border-1 small"
+                    placeholder="Type center no" aria-label="Search" name="searched">&nbsp;
+                    <button class="btn btn-primary" style="border-radius: 50%;" type="Submit"><i class="fas fa-search fa-sm"></i></button>
             </div>
         </form>
 

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">List of Branch</h1>
+   
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            {% comment %} <div class="col-auto text-right float-right ml-auto">
+                <a href="{% url 'member_entry' %}" class="btn btn-outline-primary mr-2"><i class="fas fa-user-alt">&nbsp;&nbsp;</i>Add Member</a>
+             </div> {% endcomment %}
+        </div>
+        <div class="card-body">
+            
+            {% if searched %}
+            <h3>Branch is {{searched}}</h3>
+            
+            {% for m in branch %}
+            {{m}}
+                
+            {% endfor %}
+                
+
+            {% else %}
+            <h3> Not Data Found</h3>
+                
+            {% endif %}
+                
+                
+            
+        </div>
+    </div>
+
+</div>
+    
+{% endblock content %}
+
+<div class="table-responsive">
+<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <thead>                     
+      
+        <tr>
+            <th>ID</th>
+            <th>Branch Name</th>
+           
+        </tr>
+      
+    </thead>
+    <tbody>
+        {% for m in search %}
+        <tr>
+            <td>{{m.id}}</td>
+            <td>{{m.name}}</td>
+        </tr>
+        {% endfor %}               
+    </tbody>
+</table>
+    

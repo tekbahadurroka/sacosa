@@ -326,10 +326,25 @@ def kyc_view(request,id):
     return render(request,'bm/kyc_views.html',context)
 
 def search_box(request):
+    # if request.method == 'POST':
+    #     searched = request.POST['searched']
+    #     center = CenterDetails.objects.filter(center_no__contains=searched)
+    #     return render(request,'bm/search_box.html',{'searched':searched,
+    #                                                 'center':center})
+    # else:
+    #     searched = request.POST['search']
+    #     return render(request,'bm/search_box.html',{})
+        
     search = MemberEntry.objects.all()
     #branches = BranchSetup.objects.all()
     context = {
         'search':search,
         #'branches':branches
-    }
+        }
     return render(request,'bm/search_box.html',context)
+def branch_see(request):
+    if request.method == 'POST':
+        searched = request.POST['searched']
+        branch = BranchSetup.objects.filter(branch_name__contains=searched)
+        
+        return render(request,'bm/branch_see.html',{'searched':searched,'branch':branch})
